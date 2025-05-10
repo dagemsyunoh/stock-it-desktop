@@ -1,1 +1,1 @@
-rootProject.name = "StockIt"
+rootProject.name = "stock-it-desktop"

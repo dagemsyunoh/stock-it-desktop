@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.lock.stockit")
-    mainClass.set("com.lock.stockit.HelloApplication")
+    mainClass.set("com.lock.stockit.Loader")
 }
 
 javafx {
