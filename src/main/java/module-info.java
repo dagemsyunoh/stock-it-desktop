@@ -6,6 +6,7 @@ module com.lock.stockit {
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
+    requires java.desktop;
 
     opens com.lock.stockit to javafx.fxml;
     exports com.lock.stockit;
