@@ -1,24 +1,32 @@
 package com.lock.stockit;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage primaryStage) {
-        Label welcome = new Label("Welcome to StockIt PC!");
-        StackPane root = new StackPane(welcome);
-        root.setStyle("-fx-padding: 40px;");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("sign-in.fxml"));
+            Parent root = loader.load();
 
-        Scene scene = new Scene(root);
+            primaryStage.setTitle("StockIt - Sign In");
+            primaryStage.setScene(new Scene(root));
+            primaryStage.setWidth(250);
+            primaryStage.setHeight(180);
+            primaryStage.setResizable(false);
+            primaryStage.centerOnScreen();
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 
-        primaryStage.setTitle("StockIt");
-        primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+    public static void main(String[] args) {
+        launch(args);
     }
 }
