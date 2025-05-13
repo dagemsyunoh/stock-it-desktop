@@ -1,7 +1,7 @@
 package com.lock.stockit.Controller;
 
 import com.google.gson.JsonObject;
-import com.lock.stockit.FirebaseAuthService;
+import com.lock.stockit.Helper.FirebaseAuthService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
