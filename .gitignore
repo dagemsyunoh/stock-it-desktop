@@ -40,4 +40,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
 /src/main/java/com/lock/stockit/Helper/FirebaseAuthService.java

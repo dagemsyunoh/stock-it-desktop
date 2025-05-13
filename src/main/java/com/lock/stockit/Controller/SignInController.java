@@ -39,8 +39,16 @@ public class SignInController {
         String email = emailField.getText().trim();
         String password = passwordField.getText().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
-            errorLabel.setText("Please enter email and password.");
+
+        if (email.isEmpty()) {
+            errorLabel.setText("Please enter email.");
+            errorLabel.setVisible(true);
+            return;
+        }
+
+        if (password.isEmpty()) {
+            errorLabel.setText("Please enter password.");
+            errorLabel.setVisible(true);
             return;
         }
 
@@ -55,7 +63,6 @@ public class SignInController {
                 if (result != null) {
                     Platform.runLater(() -> {
                         try {
-                            // Load Main.fxml after successful login
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/main.fxml"));
                             Parent root = loader.load();
 
@@ -66,7 +73,6 @@ public class SignInController {
                             stage.setResizable(false);
                             stage.show();
 
-                            // Close login window
                             Stage currentStage = (Stage) signInButton.getScene().getWindow();
                             currentStage.close();
 
@@ -76,7 +82,6 @@ public class SignInController {
                     });
                 } else {
                     Platform.runLater(() -> {
-                        errorLabel.setText("Invalid email or password.");
                         progressIndicator.setVisible(false);
                         errorLabel.setVisible(true);
                         signInButton.setDisable(false);
@@ -84,7 +89,19 @@ public class SignInController {
                 }
             } catch (IOException e) {
                 Platform.runLater(() -> {
-                    errorLabel.setText("Login failed. Please check your connection.");
+                    String errorMessage = e.getMessage();
+                    if (errorMessage.contains("INVALID_EMAIL")) {
+                        errorMessage = "No account found with this email.";
+                        //TODO: CHECK IF EMAIL EXISTS
+                    } else if (errorMessage.contains("INVALID_LOGIN_CREDENTIALS")) {
+                        errorMessage = "Incorrect password. Please try again.";
+                    } else if (errorMessage.contains("identitytoolkit.googleapis.com")) {
+                        errorMessage = "Network error. Please check your connection.";
+                    } else {
+                        errorMessage = "Authentication failed: " + e.getMessage();
+                    }
+                    System.out.println("Error: " + errorMessage);
+                    errorLabel.setText(errorMessage);
                     progressIndicator.setVisible(false);
                     errorLabel.setVisible(true);
                     signInButton.setDisable(false);

@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class FirebaseAuthService {
 
-    private static final String API_KEY = "YOUR_FIREBASE_WEB_API_KEY";
+    private static final String API_KEY = "AIzaSyBb9Upzy1TCZRtOltS6nVIbPPCXDuuDRwU";
 
     public static JsonObject signIn(String email, String password) throws IOException {
         String endpoint = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + API_KEY;
@@ -36,8 +36,12 @@ public class FirebaseAuthService {
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
             JsonObject json = new Gson().fromJson(reader, JsonObject.class);
-            return (responseCode == 200) ? json : null;
-        }
 
+            if (responseCode == 200) {
+                return json;
+            } else {
+                throw new IOException(json.getAsJsonObject("error").get("message").getAsString());
+            }
+        }
     }
 }
