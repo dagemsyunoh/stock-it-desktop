@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class Login extends Application {
+public class SignIn extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-ui.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-in.fxml")));
             Scene scene = new Scene(root);
             stage.setTitle("StockIt");
             stage.setScene(scene);

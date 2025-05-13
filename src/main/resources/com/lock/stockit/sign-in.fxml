@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/17.0.12"
+          fx:controller="com.lock.stockit.Controller.SignInController"
+          alignment="CENTER"
+          hgap="10"
+          vgap="15"
+          style="-fx-padding: 40; -fx-background-color: #f8f8f8;">
+
+    <!-- Header -->
+    <Label text="SIGN IN"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="0"
+           GridPane.columnSpan="2"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #333;"
+           GridPane.halignment="CENTER"/>
+
+    <!-- Email Field -->
+    <Label text="Email:"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="1"
+           style="-fx-font-size: 14px;"/>
+    <TextField fx:id="emailField"
+               promptText="Enter your email"
+               GridPane.columnIndex="1"
+               GridPane.rowIndex="1"
+               style="-fx-pref-width: 220;"/>
+
+    <!-- Password Field -->
+    <Label text="Password:"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="2"
+           style="-fx-font-size: 14px;"/>
+    <PasswordField fx:id="passwordField"
+                   promptText="Enter your password"
+                   GridPane.columnIndex="1"
+                   GridPane.rowIndex="2"
+                   style="-fx-pref-width: 220;"/>
+
+    <!-- Login Button -->
+    <Button text="SIGN IN"
+            fx:id="signInButton"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="3"
+            GridPane.columnSpan="2"
+            GridPane.halignment="CENTER"
+            style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 24; -fx-background-radius: 8;"/>
+
+    <!-- Progress Indicator (hidden by default) -->
+    <ProgressIndicator fx:id="progressIndicator"
+                       visible="false"
+                       GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"
+                       GridPane.halignment="CENTER" />
+
+    <!-- Error Label -->
+    <Label fx:id="errorLabel"
+           visible="false"
+           style="-fx-text-fill: red;"
+           GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"
+           GridPane.halignment="CENTER" />
+
+</GridPane>

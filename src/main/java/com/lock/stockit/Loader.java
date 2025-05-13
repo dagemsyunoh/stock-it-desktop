@@ -16,7 +16,7 @@ public class Loader extends Application {
     @Override
     public void start(Stage splashStage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loader-ui.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loader.fxml")));
             Scene scene = new Scene(root, 250, 180);
             splashStage.initStyle(StageStyle.UNDECORATED);
             splashStage.setScene(scene);
@@ -27,7 +27,7 @@ public class Loader extends Application {
             PauseTransition pause = new PauseTransition(Duration.seconds(3));
             pause.setOnFinished(event -> {
                 splashStage.close();
-                new Login().start(new Stage());
+                new SignIn().start(new Stage());
             });
             pause.play();
         } catch (Exception e) {
