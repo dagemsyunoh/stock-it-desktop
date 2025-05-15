@@ -11,6 +11,6 @@ module com.lock.stockit {
 
     opens com.lock.stockit to javafx.fxml;
     exports com.lock.stockit;
-    exports com.lock.stockit.Controller;
-    opens com.lock.stockit.Controller to javafx.fxml;
+    exports com.lock.stockit.controller;
+    opens com.lock.stockit.controller to javafx.fxml;
 }
