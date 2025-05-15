@@ -1,4 +1,4 @@
-package com.lock.stockit.Helper;
+package com.lock.stockit.helper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

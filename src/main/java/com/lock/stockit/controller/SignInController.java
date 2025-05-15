@@ -1,13 +1,14 @@
-package com.lock.stockit.Controller;
+package com.lock.stockit.controller;
 
 import com.google.gson.JsonObject;
-import com.lock.stockit.Helper.FirebaseAuthService;
+import com.lock.stockit.helper.FirebaseAuthService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -69,8 +70,8 @@ public class SignInController {
                             Stage stage = new Stage();
                             stage.setTitle("StockIt");
                             stage.setScene(new Scene(root));
-                            stage.setMaximized(true);
-                            stage.setResizable(false);
+                            stage.setFullScreen(true);
+                            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
                             stage.show();
 
                             Stage currentStage = (Stage) signInButton.getScene().getWindow();
@@ -87,20 +88,13 @@ public class SignInController {
                         signInButton.setDisable(false);
                     });
                 }
-            } catch (IOException e) {
+            } catch (Exception exception) {
                 Platform.runLater(() -> {
-                    String errorMessage = e.getMessage();
-                    if (errorMessage.contains("INVALID_EMAIL")) {
-                        errorMessage = "No account found with this email.";
-                        //TODO: CHECK IF EMAIL EXISTS
-                    } else if (errorMessage.contains("INVALID_LOGIN_CREDENTIALS")) {
-                        errorMessage = "Incorrect password. Please try again.";
-                    } else if (errorMessage.contains("identitytoolkit.googleapis.com")) {
-                        errorMessage = "Network error. Please check your connection.";
-                    } else {
-                        errorMessage = "Authentication failed: " + e.getMessage();
-                    }
-                    System.out.println("Error: " + errorMessage);
+                    String errorMessage = switch (exception.getMessage()) {
+                        case "INVALID_LOGIN_CREDENTIALS" -> "Incorrect email or password.\nPlease try again.";
+                        case "INVALID_EMAIL" -> "Invalid email address.\nPlease enter a valid email address.";
+                        default -> exception.getMessage();
+                    };
                     errorLabel.setText(errorMessage);
                     progressIndicator.setVisible(false);
                     errorLabel.setVisible(true);
