@@ -35,7 +35,7 @@
         <left>
             <AnchorPane BorderPane.alignment="CENTER">
                 <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #5D3FD3;">
-                    <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="WHITE">
+                    <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: transparent;" text="Menu" textAlignment="CENTER" textFill="WHITE">
                         <font>
                             <Font size="15.0" />
                         </font>
