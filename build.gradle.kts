@@ -36,7 +36,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.lock.stockit")
-    mainClass.set("com.lock.stockit.Loader")
+    mainClass.set("com.lock.stockit.Main")
     // Add JVM arguments for the 'run' task
     applicationDefaultJvmArgs = listOf(
         "--enable-native-access=javafx.graphics",

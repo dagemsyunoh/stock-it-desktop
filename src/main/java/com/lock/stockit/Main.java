@@ -6,25 +6,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.util.Objects;
 
 public class Main extends Application {
 
+    double x,y = 0;
     @Override
-    public void start(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-            Parent root = loader.load();
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/lock/stockit/layout/main.fxml")));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
-            Stage stage = new Stage();
-            stage.setTitle("StockIt");
-            stage.setScene(new Scene(root));
-            stage.setFullScreen(true);
-            stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        root.setOnMousePressed(event -> {
+            x = event.getSceneX();
+            y = event.getSceneY();
+        });
+
+        root.setOnMouseDragged(event -> {
+            primaryStage.setX(event.getScreenX() - x);
+            primaryStage.setY(event.getScreenY() - y);
+        });
+
+        primaryStage.setTitle("StockIt");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        primaryStage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);

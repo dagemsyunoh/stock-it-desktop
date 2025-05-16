@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.lock.stockit.controller.MainController">
+
+    <!-- Sidebar -->
+    <VBox fx:id="slider" alignment="TOP_CENTER" minWidth="0" prefWidth="200.0" style="-fx-background-color: #5D3FD3;">
+        <Button fx:id="menu" prefWidth="200.0" style="-fx-background-color: transparent;" text="Menu"
+                textAlignment="CENTER" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="home" prefWidth="200.0" style="-fx-background-color: transparent;" text="Home"
+                textAlignment="CENTER" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="receipt" prefWidth="200.0" style="-fx-background-color: transparent;" text="Receipt"
+                textAlignment="CENTER" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="inventory" prefWidth="200.0" style="-fx-background-color: transparent;" text="Inventory"
+                textAlignment="CENTER" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="more" prefWidth="200.0" style="-fx-background-color: transparent;" text="More"
+                textAlignment="CENTER" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+            </graphic>
+            <VBox.margin>
+                <Insets bottom="10.0" top="10.0"/>
+            </VBox.margin>
+        </Button>
+    </VBox>
+
+    <!-- Content Area -->
+    <AnchorPane fx:id="contentArea" style="-fx-background-color: #ECF0F1;" HBox.hgrow="ALWAYS">
+        <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
+        <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
+        <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
+        <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
+    </AnchorPane>
+</HBox>
