@@ -64,7 +64,7 @@ public class SignInController {
                 if (result != null) {
                     Platform.runLater(() -> {
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/main.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/layout/main.fxml"));
                             Parent root = loader.load();
 
                             Stage stage = new Stage();
