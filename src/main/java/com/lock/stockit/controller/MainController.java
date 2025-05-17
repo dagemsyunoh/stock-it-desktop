@@ -1,6 +1,8 @@
 package com.lock.stockit.controller;
 
 import javafx.animation.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -16,7 +19,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-
+    
     @FXML
     private Button menu, home, receipt, inventory, more;
 
@@ -28,7 +31,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadView("home.fxml");
+        loadView("home.fxml", home);
         menu.setOnAction(event -> handleMenu());
         home.setOnAction(event -> handleHome());
         receipt.setOnAction(event -> handleReceipt());
@@ -38,22 +41,8 @@ public class MainController implements Initializable {
 
     @FXML
     private void handleMenu() {
-//        TranslateTransition slide = new TranslateTransition();
-//        slide.setDuration(javafx.util.Duration.seconds(0.4));
-//        slide.setNode(slider);
-//
-//        int x = 0, y = -100;
-//        if (slider.getTranslateX() == x) {
-//            x = y;
-//            y = 0;
-//        }
-//        slide.setToX(x);
-//        slide.play();
-//
-//        slider.setTranslateX(y);
-
-        boolean isExpanded = slider.getPrefWidth() == 200;
-        double targetWidth = isExpanded ? 60 : 200;
+        boolean isExpanded = slider.getPrefWidth() == 143;
+        double targetWidth = isExpanded ? 0 : 143;
 
         // Animate the width
         Timeline timeline = new Timeline();
@@ -74,25 +63,25 @@ public class MainController implements Initializable {
 
     @FXML
     private void handleHome() {
-        loadView("home.fxml");
+        loadView("home.fxml", home);
     }
 
     @FXML
     private void handleReceipt() {
-        loadView("receipt.fxml");
+        loadView("receipt.fxml", receipt);
     }
 
     @FXML
     private void handleInventory() {
-        loadView("inventory.fxml");
+        loadView("inventory.fxml", inventory);
     }
 
     @FXML
     private void handleMore() {
-        loadView("more.fxml");
+        loadView("more.fxml", more);
     }
 
-    private void loadView(String fxmlFile) {
+    private void loadView(String fxmlFile, Button activeButton) {
         try {
             Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/lock/stockit/layout/" + fxmlFile)));
             AnchorPane.setTopAnchor(node, 0.0);
@@ -100,24 +89,35 @@ public class MainController implements Initializable {
             AnchorPane.setLeftAnchor(node, 0.0);
             AnchorPane.setRightAnchor(node, 0.0);
             contentArea.getChildren().setAll(node);
+            highlightActiveButton(activeButton);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-//    @FXML
-//    private void handleSingOut(ActionEvent event) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/sign-in.fxml"));
-//            Parent root = loader.load();
-//
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setScene(new Scene(root));
-//            stage.centerOnScreen();
-//            stage.setResizable(false);
-//            stage.show();
-//        } catch (IOException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
+    private void highlightActiveButton(Button activeButton) {
+        Button[] buttons = { home, receipt, inventory, more };
+
+        for (Button btn : buttons) if (btn != activeButton) btn.setStyle("-fx-background-color: transparent;");
+
+        ObjectProperty<Color> color = getColorObjectProperty(activeButton);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(200), new KeyValue(color, Color.rgb(255, 255, 255, 0.2))));
+        timeline.play();
+    }
+
+    private static ObjectProperty<Color> getColorObjectProperty(Button activeButton) {
+        ObjectProperty<Color> color = new SimpleObjectProperty<>(Color.TRANSPARENT);
+        color.addListener((obs, oldVal, newVal) -> {
+            String style = String.format(
+                    "-fx-background-color: rgba(%d, %d, %d, %.2f);",
+                    (int)(newVal.getRed() * 255),
+                    (int)(newVal.getGreen() * 255),
+                    (int)(newVal.getBlue() * 255),
+                    newVal.getOpacity()
+            );
+            activeButton.setStyle(style);
+        });
+        return color;
+    }
 }

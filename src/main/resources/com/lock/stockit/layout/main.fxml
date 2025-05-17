@@ -2,59 +2,56 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.lock.stockit.controller.MainController">
+<HBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lock.stockit.controller.MainController">
 
     <!-- Sidebar -->
-    <VBox fx:id="slider" alignment="TOP_CENTER" minWidth="0" prefWidth="200.0" style="-fx-background-color: #5D3FD3;">
-        <Button fx:id="menu" prefWidth="200.0" style="-fx-background-color: transparent;" text="Menu"
-                textAlignment="CENTER" textFill="WHITE">
+    <VBox fx:id="slider" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #5D3FD3;">
+        <Button fx:id="menu" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" textFill="WHITE">
             <graphic>
-                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+                <FontIcon iconColor="white" iconLiteral="fas-bars" iconSize="22" />
             </graphic>
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0"/>
-            </VBox.margin>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
         </Button>
-        <Button fx:id="home" prefWidth="200.0" style="-fx-background-color: transparent;" text="Home"
-                textAlignment="CENTER" textFill="WHITE">
+        <Button fx:id="home" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" textFill="WHITE">
             <graphic>
-                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+                <FontIcon iconColor="white" iconLiteral="fas-home" iconSize="22" />
             </graphic>
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0"/>
-            </VBox.margin>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
         </Button>
-        <Button fx:id="receipt" prefWidth="200.0" style="-fx-background-color: transparent;" text="Receipt"
-                textAlignment="CENTER" textFill="WHITE">
+        <Button fx:id="receipt" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" textFill="WHITE">
             <graphic>
-                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+                <FontIcon iconColor="white" iconLiteral="fas-print" iconSize="22" />
             </graphic>
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0"/>
-            </VBox.margin>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
         </Button>
-        <Button fx:id="inventory" prefWidth="200.0" style="-fx-background-color: transparent;" text="Inventory"
-                textAlignment="CENTER" textFill="WHITE">
+        <Button fx:id="inventory" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" textFill="WHITE">
             <graphic>
-                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+                <FontIcon iconColor="white" iconLiteral="fas-archive" iconSize="22" />
             </graphic>
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0"/>
-            </VBox.margin>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
         </Button>
-        <Button fx:id="more" prefWidth="200.0" style="-fx-background-color: transparent;" text="More"
-                textAlignment="CENTER" textFill="WHITE">
+        <Button fx:id="more" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" style="-fx-background-color: transparent;" textFill="WHITE">
             <graphic>
-                <ImageView fitHeight="22.0" fitWidth="22.0" preserveRatio="true"/>
+                <FontIcon iconColor="white" iconLiteral="fas-cogs" iconSize="22" />
             </graphic>
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0"/>
-            </VBox.margin>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
         </Button>
+      <padding>
+         <Insets bottom="20.0" top="20.0" />
+      </padding>
     </VBox>
 
     <!-- Content Area -->
