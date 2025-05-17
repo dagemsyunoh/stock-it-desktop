@@ -62,6 +62,7 @@ dependencies {
         exclude(group = "org.openjfx")
     }
     implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
+    implementation("org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.1")
     implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")

@@ -28,6 +28,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        handleMenu();
         loadView("home.fxml");
         menu.setOnAction(event -> handleMenu());
         home.setOnAction(event -> handleHome());
@@ -38,22 +39,8 @@ public class MainController implements Initializable {
 
     @FXML
     private void handleMenu() {
-//        TranslateTransition slide = new TranslateTransition();
-//        slide.setDuration(javafx.util.Duration.seconds(0.4));
-//        slide.setNode(slider);
-//
-//        int x = 0, y = -100;
-//        if (slider.getTranslateX() == x) {
-//            x = y;
-//            y = 0;
-//        }
-//        slide.setToX(x);
-//        slide.play();
-//
-//        slider.setTranslateX(y);
-
-        boolean isExpanded = slider.getPrefWidth() == 200;
-        double targetWidth = isExpanded ? 60 : 200;
+        boolean isExpanded = slider.getPrefWidth() == 143;
+        double targetWidth = isExpanded ? 0 : 143;
 
         // Animate the width
         Timeline timeline = new Timeline();
@@ -104,20 +91,4 @@ public class MainController implements Initializable {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
-//    @FXML
-//    private void handleSingOut(ActionEvent event) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/sign-in.fxml"));
-//            Parent root = loader.load();
-//
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//            stage.setScene(new Scene(root));
-//            stage.centerOnScreen();
-//            stage.setResizable(false);
-//            stage.show();
-//        } catch (IOException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
 }
