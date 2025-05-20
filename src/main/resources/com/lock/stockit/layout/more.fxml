@@ -7,7 +7,20 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lock.stockit.controller.MoreController"
             style="-fx-background-color: #ffffff;">
-    <Label text="Welcome to the More Page"
-           layoutX="40" layoutY="40"
-           style="-fx-font-size: 18px; -fx-text-fill: #2C3E50;"/>
+
+    <VBox alignment="CENTER"
+          spacing="20.0"
+          AnchorPane.topAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0"
+          AnchorPane.rightAnchor="0.0">
+
+        <Label text="Welcome to the More Page"
+               style="-fx-font-size: 18px; -fx-text-fill: #2C3E50;" />
+
+        <Button text="SIGN OUT"
+                fx:id="signOutButton"
+                onAction="#handleSignOut"
+                style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 24; -fx-background-radius: 8;" />
+    </VBox>
 </AnchorPane>

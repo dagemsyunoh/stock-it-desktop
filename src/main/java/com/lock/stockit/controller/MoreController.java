@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,9 +14,17 @@ import java.io.IOException;
 public class MoreController {
 
     @FXML
-    private void handleSingOut(ActionEvent event) {
+    public Button signOutButton;
+
+    @FXML
+    public void initialize() {
+        signOutButton.setOnAction(this::handleSignOut);
+    }
+
+    @FXML
+    private void handleSignOut(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/sign-in.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/lock/stockit/layout/sign-in.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -27,4 +36,5 @@ public class MoreController {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
 }
