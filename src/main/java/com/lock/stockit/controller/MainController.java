@@ -19,7 +19,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-    
+
+    private Button activeButton = null;
+
+    private final PauseTransition collapseTimer = new PauseTransition(Duration.seconds(3));
+
     @FXML
     private Button menu, home, receipt, inventory, more;
 
@@ -32,11 +36,19 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadView("home.fxml", home);
+
         menu.setOnAction(event -> handleMenu());
         home.setOnAction(event -> handleHome());
         receipt.setOnAction(event -> handleReceipt());
         inventory.setOnAction(event -> handleInventory());
         more.setOnAction(event -> handleMore());
+
+        slider.setOnMouseEntered(e -> collapseTimer.stop());
+        slider.setOnMouseMoved(e -> collapseTimer.stop());
+        slider.setOnMouseExited(e -> {
+            collapseTimer.setOnFinished(ev -> handleMenu());
+            collapseTimer.playFromStart();
+        });
     }
 
     @FXML
@@ -81,7 +93,7 @@ public class MainController implements Initializable {
         loadView("more.fxml", more);
     }
 
-    private void loadView(String fxmlFile, Button activeButton) {
+    private void loadView(String fxmlFile, Button button) {
         try {
             Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/lock/stockit/layout/" + fxmlFile)));
             AnchorPane.setTopAnchor(node, 0.0);
@@ -89,35 +101,44 @@ public class MainController implements Initializable {
             AnchorPane.setLeftAnchor(node, 0.0);
             AnchorPane.setRightAnchor(node, 0.0);
             contentArea.getChildren().setAll(node);
-            highlightActiveButton(activeButton);
+            highlightActiveButton(button);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
-    private void highlightActiveButton(Button activeButton) {
-        Button[] buttons = { home, receipt, inventory, more };
+    private void highlightActiveButton(Button newButton) {
+        String defaultStyle = "-fx-background-color: transparent;";
 
-        for (Button btn : buttons) if (btn != activeButton) btn.setStyle("-fx-background-color: transparent;");
+        // If there's a previously active button, fade out its highlight
+        if (activeButton != null && activeButton != newButton)
+            animateBackgroundColor(activeButton, Color.rgb(255, 255, 255, 0.2), Color.TRANSPARENT, () -> activeButton.setStyle(defaultStyle));
 
-        ObjectProperty<Color> color = getColorObjectProperty(activeButton);
+        // Fade in highlight on the newly active button
+        animateBackgroundColor(newButton, Color.TRANSPARENT, Color.rgb(255, 255, 255, 0.2), null);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(200), new KeyValue(color, Color.rgb(255, 255, 255, 0.2))));
-        timeline.play();
+        activeButton = newButton;
     }
 
-    private static ObjectProperty<Color> getColorObjectProperty(Button activeButton) {
-        ObjectProperty<Color> color = new SimpleObjectProperty<>(Color.TRANSPARENT);
+    private void animateBackgroundColor(Button button, Color from, Color to, Runnable onFinished) {
+        ObjectProperty<Color> color = new SimpleObjectProperty<>(from);
         color.addListener((obs, oldVal, newVal) -> {
-            String style = String.format(
-                    "-fx-background-color: rgba(%d, %d, %d, %.2f);",
+            String style = String.format("-fx-background-color: rgba(%d, %d, %d, %.2f);",
                     (int)(newVal.getRed() * 255),
                     (int)(newVal.getGreen() * 255),
                     (int)(newVal.getBlue() * 255),
-                    newVal.getOpacity()
-            );
-            activeButton.setStyle(style);
+                    newVal.getOpacity());
+            button.setStyle(style);
         });
-        return color;
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(color, from)),
+                new KeyFrame(Duration.millis(200), new KeyValue(color, to))
+        );
+
+        if (onFinished != null) timeline.setOnFinished(e -> onFinished.run());
+
+        timeline.play();
     }
+
 }
