@@ -22,6 +22,8 @@ public class MainController implements Initializable {
 
     private Button activeButton = null;
 
+    private final PauseTransition collapseTimer = new PauseTransition(Duration.seconds(3));
+
     @FXML
     private Button menu, home, receipt, inventory, more;
 
@@ -34,11 +36,19 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadView("home.fxml", home);
+
         menu.setOnAction(event -> handleMenu());
         home.setOnAction(event -> handleHome());
         receipt.setOnAction(event -> handleReceipt());
         inventory.setOnAction(event -> handleInventory());
         more.setOnAction(event -> handleMore());
+
+        slider.setOnMouseEntered(e -> collapseTimer.stop());
+        slider.setOnMouseMoved(e -> collapseTimer.stop());
+        slider.setOnMouseExited(e -> {
+            collapseTimer.setOnFinished(ev -> handleMenu());
+            collapseTimer.playFromStart();
+        });
     }
 
     @FXML
